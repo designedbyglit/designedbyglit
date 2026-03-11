@@ -31,7 +31,7 @@ let loader = new THREE.STLLoader();
 
 let mesh;
 
-loader.load("piece.stl", function(geometry){
+loader.load("piece.STL", function(geometry){
 
 let material = new THREE.MeshStandardMaterial({
 color:0x7a00ff
@@ -84,3 +84,4 @@ mesh.material.color.set(color);
 });
 
 }
+
