@@ -53,7 +53,11 @@
 <input type="text" name="texte">
 
 <label>Logo</label>
-<input type="file" name="logo">
+<input type="file" name="logo" id="logoInput" accept="image/*">
+
+<div class="preview-image">
+<img id="logoPreview" src="" style="max-width:200px;display:none;border-radius:10px;margin-top:10px;">
+</div>
 
 <label>Détails</label>
 <textarea name="details"></textarea>
@@ -104,3 +108,4 @@
 
 </body>
 </html>
+
