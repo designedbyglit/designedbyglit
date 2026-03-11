@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Commande</title>
+
+<title>Configurer ta pièce</title>
 
 <link rel="stylesheet" href="style.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/STLLoader.js"></script>
-
-<script src="script.js"></script>
 
 </head>
 
@@ -19,8 +16,8 @@
 
 <header>
 
-<a href="index.html" class="logo">
-<img src="logo.png">
+<a href="index.html">
+<img src="logo.png" class="logo">
 </a>
 
 <nav>
@@ -39,10 +36,10 @@
 <h2>Configurer ta pièce</h2>
 
 <label>Nom</label>
-<input type="text" name="nom">
+<input type="text">
 
 <label>Email</label>
-<input type="email" name="email">
+<input type="email">
 
 <label>Moteur</label>
 <select>
@@ -60,28 +57,43 @@
 <label>Texte</label>
 <input type="text">
 
+<label>Logo</label>
+<input type="file">
+
 <label>Détails</label>
 <textarea></textarea>
 
-<button class="cta">Envoyer</button>
+<button onclick="exportImage()" class="cta">
+Exporter image
+</button>
 
 </div>
 
 <div class="form-right">
 
-<h2>Couleurs</h2>
+<h3>Choisir la zone</h3>
+
+<label>
+<input type="radio" name="zone" value="corps" checked>
+Corps
+</label>
+
+<label>
+<input type="radio" name="zone" value="logo">
+Logo
+</label>
+
+<h3>Couleurs</h3>
 
 <div class="color-picker">
 
-<div class="color rouge" data-color="#ff0000"></div>
-<div class="color bleu" data-color="#0044ff"></div>
-<div class="color vert" data-color="#00aa00"></div>
-<div class="color jaune" data-color="#ffee00"></div>
-<div class="color violet" data-color="#7a00ff"></div>
-<div class="color rose" data-color="#ff4df2"></div>
-<div class="color orange" data-color="#ff6600"></div>
-<div class="color noir" data-color="#000000"></div>
-<div class="color blanc" data-color="#ffffff"></div>
+<div class="color" data-color="#ff0000" style="background:#ff0000"></div>
+<div class="color" data-color="#0000ff" style="background:#0000ff"></div>
+<div class="color" data-color="#00aa00" style="background:#00aa00"></div>
+<div class="color" data-color="#7a00ff" style="background:#7a00ff"></div>
+<div class="color" data-color="#ff4df2" style="background:#ff4df2"></div>
+<div class="color" data-color="#000000" style="background:#000000"></div>
+<div class="color" data-color="#ffffff" style="background:#ffffff"></div>
 
 </div>
 
@@ -94,7 +106,7 @@
 </div>
 
 </section>
-  
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/STLLoader.js"></script>
@@ -102,11 +114,6 @@
 <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
 
 <script src="script.js"></script>
-  
-<script src="script.js"></script>
 
 </body>
 </html>
-
-
-
