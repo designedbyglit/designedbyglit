@@ -1,106 +1,72 @@
-// COULEURS
+let scene = new THREE.Scene();
+
+let camera = new THREE.PerspectiveCamera(
+75,
+400/400,
+0.1,
+1000
+);
+
+let renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(400,400);
+
+document.getElementById("viewer").appendChild(renderer.domElement);
+
+let light = new THREE.DirectionalLight(0xffffff,1);
+light.position.set(0,1,1);
+scene.add(light);
+
+let loader = new THREE.STLLoader();
+
+let mesh;
+
+loader.load("piece.stl", function(geometry){
+
+let material = new THREE.MeshStandardMaterial({
+color:0x7a00ff,
+metalness:0.3,
+roughness:0.4
+});
+
+mesh = new THREE.Mesh(geometry,material);
+
+geometry.center();
+
+scene.add(mesh);
+
+});
+
+camera.position.z = 100;
+
+function animate(){
+
+requestAnimationFrame(animate);
+
+if(mesh){
+mesh.rotation.y += 0.01;
+}
+
+renderer.render(scene,camera);
+
+}
+
+animate();
+
+
+// CHANGEMENT COULEUR
 
 const colors = document.querySelectorAll(".color");
-const preview = document.getElementById("preview");
-const couleursInput = document.getElementById("couleurs");
 
-let selectedColors = [];
+colors.forEach(color=>{
 
-colors.forEach(color => {
+color.addEventListener("click",()=>{
 
-color.addEventListener("click", () => {
+const c = color.dataset.color;
 
-const name = color.dataset.color;
-
-if(color.classList.contains("selected")){
-
-color.classList.remove("selected");
-selectedColors = selectedColors.filter(c => c !== name);
-
-}else{
-
-if(selectedColors.length < 4){
-
-color.classList.add("selected");
-selectedColors.push(name);
-
-preview.style.background = window.getComputedStyle(color).backgroundColor;
-
-}else{
-
-alert("Maximum 4 couleurs");
-
-}
-
-}
-
-if(couleursInput){
-couleursInput.value = selectedColors.join(", ");
+if(mesh){
+mesh.material.color.set(c);
 }
 
 });
 
 });
-
-
-// APERÇU IMAGE LOGO
-
-const logoInput = document.getElementById("logoInput");
-const logoPreview = document.getElementById("logoPreview");
-
-if(logoInput){
-
-logoInput.addEventListener("change", function(){
-
-const file = this.files[0];
-
-if(file){
-
-const reader = new FileReader();
-
-reader.addEventListener("load", function(){
-
-logoPreview.src = reader.result;
-logoPreview.style.display = "block";
-
-});
-
-reader.readAsDataURL(file);
-
-}
-
-});
-
-}
-
-
-// ROTATION DE LA PIECE
-
-let rotation = 0;
-
-if(preview){
-
-preview.addEventListener("mousemove", (e)=>{
-
-const rect = preview.getBoundingClientRect();
-
-const x = e.clientX - rect.left;
-const y = e.clientY - rect.top;
-
-const centerX = rect.width / 2;
-const centerY = rect.height / 2;
-
-const rotateX = (y - centerY) / 10;
-const rotateY = (centerX - x) / 10;
-
-preview.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-
-});
-
-preview.addEventListener("mouseleave", ()=>{
-
-preview.style.transform = "rotateX(0deg) rotateY(0deg)";
-
-});
-
-}
