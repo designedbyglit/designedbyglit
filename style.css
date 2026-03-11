@@ -1,7 +1,9 @@
+/* GENERAL */
+
 body{
 margin:0;
-font-family:Arial;
-background:linear-gradient(180deg,#0a0a0a,#1a0030);
+font-family:Arial, Helvetica, sans-serif;
+background:linear-gradient(180deg,#0a0a0a,#1b0030);
 color:white;
 }
 
@@ -9,92 +11,44 @@ color:white;
 
 header{
 background:black;
-padding:20px;
-text-align:center;
 border-bottom:3px solid #7a00ff;
+padding:20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
 .logo img{
-height:80px;
+height:70px;
 }
 
 nav a{
 color:white;
-margin:10px;
 text-decoration:none;
+margin-left:20px;
 font-weight:bold;
+transition:0.2s;
 }
 
-/* HERO */
-
-.hero{
-text-align:center;
-padding:120px 20px;
-background:linear-gradient(135deg,#1b0030,#4a0085);
-}
-
-.cta{
-background:linear-gradient(45deg,#7a00ff,#ff4df2);
-padding:15px 30px;
-border:none;
-color:white;
-border-radius:10px;
-cursor:pointer;
-}
-
-/* PRODUITS */
-
-.products{
-padding:60px;
-max-width:1100px;
-margin:auto;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-}
-
-.card{
-background:#1a1a1a;
-padding:30px;
-border-radius:10px;
-text-align:center;
-}
-
-/* GALERIE */
-
-.gallery{
-padding:60px;
-max-width:1100px;
-margin:auto;
-}
-
-.gallery-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-
-.gallery img{
-width:100%;
-border-radius:10px;
+nav a:hover{
+color:#ff4df2;
 }
 
 /* PAGE COMMANDE */
 
 .commande{
-padding:60px;
-max-width:1200px;
+padding:50px;
+max-width:1300px;
 margin:auto;
 }
 
 .commande-container{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:50px;
+gap:60px;
 }
+
+/* FORMULAIRE */
 
 .form-left{
 display:flex;
@@ -102,89 +56,99 @@ flex-direction:column;
 gap:15px;
 }
 
-input,select,textarea{
+label{
+font-weight:bold;
+margin-top:10px;
+}
+
+input, select, textarea{
+
 padding:12px;
-background:#1a1a1a;
-border:none;
-color:white;
 border-radius:6px;
+border:none;
+background:#1a1a1a;
+color:white;
+font-size:14px;
+
+}
+
+textarea{
+min-height:100px;
+resize:vertical;
+}
+
+/* BOUTON */
+
+.cta{
+
+margin-top:20px;
+padding:15px;
+border:none;
+border-radius:10px;
+font-weight:bold;
+color:white;
+font-size:16px;
+
+background:linear-gradient(45deg,#7a00ff,#ff4df2);
+
+cursor:pointer;
+transition:0.3s;
+
+}
+
+.cta:hover{
+
+transform:scale(1.05);
+
+}
+
+/* CONFIGURATEUR */
+
+.form-right{
+text-align:center;
+}
+
+/* CARRES COULEUR */
+
+.color-picker{
+
+margin-top:20px;
+
+display:grid;
+grid-template-columns:repeat(3,75px);
+gap:20px;
+justify-content:center;
+
+}
+
+.color{
+
+width:75px;
+height:75px;
+
+border-radius:10px;
+
+border:3px solid white;
+
+cursor:pointer;
+
+transition:0.2s;
+
+}
+
+.color:hover{
+
+transform:scale(1.1);
+
+}
+
+.color.selected{
+
+border:4px solid #ff4df2;
+
 }
 
 /* COULEURS */
-
-.color-picker{
-display:grid;
-grid-template-columns:repeat(3,75px);
-gap:15px;
-}
-
-.color{
-width:75px;
-height:75px;
-border-radius:8px;
-border:3px solid white;
-cursor:pointer;
-}
-
-/* couleurs */
-
-.noir{background:#000;}
-.blanc{background:#fff;}
-.rouge{background:#ff0000;}
-.orange{background:#ff8000;}
-.jaune{background:#ffd000;}
-.vertclair{background:#39ff14;}
-.vertfonce{background:#006400;}
-.bleuclair{background:#4db8ff;}
-.bleufonce{background:#001f7a;}
-.violet{background:#7a00ff;}
-.rose{background:#ff4df2;}
-.marron{background:#6b3e26;}
-
-.color.selected{
-border:4px solid #7a00ff;
-}
-
-/* PREVIEW */
-
-#preview{
-width:200px;
-height:200px;
-background:#444;
-border-radius:15px;
-margin-top:30px;
-}
-
-/* FOOTER */
-
-footer{
-text-align:center;
-padding:20px;
-background:black;
-margin-top:40px;
-}
-
-#viewer{
-width:400px;
-height:400px;
-background:#111;
-border-radius:10px;
-margin-top:20px;
-}
-
-.color-picker{
-display:grid;
-grid-template-columns:repeat(3,75px);
-gap:15px;
-}
-
-.color{
-width:75px;
-height:75px;
-border-radius:8px;
-cursor:pointer;
-border:3px solid white;
-}
 
 .rouge{background:#ff0000;}
 .bleu{background:#0044ff;}
@@ -193,6 +157,38 @@ border:3px solid white;
 .violet{background:#7a00ff;}
 .rose{background:#ff4df2;}
 .orange{background:#ff6600;}
-.noir{background:#000;}
-.blanc{background:#fff;}
+.noir{background:#000000;}
+.blanc{background:#ffffff;}
 
+/* VIEWER 3D */
+
+#viewer{
+
+width:400px;
+height:400px;
+
+background:#111;
+
+margin-top:30px;
+
+border-radius:15px;
+
+box-shadow:0 0 30px rgba(0,0,0,0.6);
+
+}
+
+/* FOOTER */
+
+footer{
+
+margin-top:50px;
+
+background:black;
+
+padding:20px;
+
+text-align:center;
+
+border-top:2px solid #7a00ff;
+
+}
