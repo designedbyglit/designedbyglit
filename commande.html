@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +10,6 @@
 <body>
 
 <header>
-
 <a href="index.html" class="logo">
 <img src="logo.png">
 </a>
@@ -20,10 +18,11 @@
 <a href="index.html">Accueil</a>
 <a href="commande.html">Commander</a>
 </nav>
-
 </header>
 
 <section class="commande">
+
+<form action="https://formspree.io/f/xeergeee" method="POST">
 
 <div class="commande-container">
 
@@ -32,64 +31,68 @@
 <h2>Configurer ta pièce</h2>
 
 <label>Nom</label>
-<input type="text">
+<input type="text" name="nom" required>
 
 <label>Email</label>
-<input type="email">
+<input type="email" name="email" required>
 
 <label>Moteur</label>
-<select>
+<select name="moteur">
 <option>AM6</option>
 <option>Derbi</option>
 </select>
 
 <label>Type de pièce</label>
-<select>
+<select name="piece">
 <option>Cache allumage</option>
 <option>Cache obturateur</option>
 <option>Récupérateur de fluide</option>
 </select>
 
 <label>Texte</label>
-<input type="text">
+<input type="text" name="texte">
 
 <label>Logo</label>
-<input type="file">
+<input type="file" name="logo">
 
 <label>Détails</label>
-<textarea></textarea>
+<textarea name="details"></textarea>
 
-<button class="cta">Envoyer</button>
+<button type="submit" class="cta">Envoyer la commande</button>
 
 </div>
 
 <div class="form-right">
 
-<h2>Couleurs</h2>
+<h2>Choisis les couleurs (max 4)</h2>
 
 <div class="color-picker">
 
-<div class="color noir"></div>
-<div class="color blanc"></div>
-<div class="color rouge"></div>
-<div class="color orange"></div>
-<div class="color jaune"></div>
-<div class="color vertclair"></div>
-<div class="color vertfonce"></div>
-<div class="color bleuclair"></div>
-<div class="color bleufonce"></div>
-<div class="color violet"></div>
-<div class="color rose"></div>
-<div class="color marron"></div>
+<div class="color noir" data-color="noir"></div>
+<div class="color blanc" data-color="blanc"></div>
+<div class="color rouge" data-color="rouge"></div>
+<div class="color orange" data-color="orange"></div>
+<div class="color jaune" data-color="jaune"></div>
+<div class="color vertclair" data-color="vert clair"></div>
+<div class="color vertfonce" data-color="vert foncé"></div>
+<div class="color bleuclair" data-color="bleu clair"></div>
+<div class="color bleufonce" data-color="bleu foncé"></div>
+<div class="color violet" data-color="violet"></div>
+<div class="color rose" data-color="rose"></div>
+<div class="color marron" data-color="marron"></div>
 
 </div>
 
-<img id="preview" src="lala.png">
-<img id="preview" src="piece.png">
+<input type="hidden" name="couleurs" id="couleurs">
+
+<h3>Aperçu</h3>
+<div id="preview"></div>
 
 </div>
 
 </div>
+
+</form>
 
 </section>
 
