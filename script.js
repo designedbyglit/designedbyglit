@@ -1,114 +1,100 @@
-// SCENE 3D
+let scene = new THREE.Scene();
 
-const scene = new THREE.Scene();
-
-const camera = new THREE.PerspectiveCamera(
+let camera = new THREE.PerspectiveCamera(
 75,
 400 / 400,
 0.1,
 1000
 );
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(400, 400);
+let renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(400,400);
 
 document.getElementById("viewer").appendChild(renderer.domElement);
 
-
-// LUMIERE
-
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(0, 1, 1);
+let light = new THREE.DirectionalLight(0xffffff,1);
+light.position.set(0,1,1);
 scene.add(light);
 
+let light2 = new THREE.AmbientLight(0xffffff,0.6);
+scene.add(light2);
 
-// CHARGEMENT STL
-
-const loader = new THREE.STLLoader();
+let loader = new THREE.STLLoader();
 
 let mesh;
 
-loader.load("piece.stl", function (geometry) {
+loader.load("piece.stl", function(geometry){
 
-const material = new THREE.MeshStandardMaterial({
-color: 0x7a00ff,
-metalness: 0.3,
-roughness: 0.4
+let material = new THREE.MeshStandardMaterial({
+color:0x7a00ff,
+metalness:0.3,
+roughness:0.4
 });
 
-mesh = new THREE.Mesh(geometry, material);
+mesh = new THREE.Mesh(geometry,material);
 
 geometry.center();
+
+mesh.scale.set(0.5,0.5,0.5);
 
 scene.add(mesh);
 
 });
 
-camera.position.z = 100;
+camera.position.z = 120;
 
 
-// ROTATION AUTO
+// animation
 
-function animate() {
+function animate(){
 
 requestAnimationFrame(animate);
 
-if (mesh) {
+if(mesh){
 mesh.rotation.y += 0.01;
 }
 
-renderer.render(scene, camera);
+renderer.render(scene,camera);
 
 }
 
 animate();
 
 
-// ROTATION SOURIS
+// rotation souris
 
-let isDragging = false;
-let previousMousePosition = { x: 0, y: 0 };
+let mouseDown = false;
 
-renderer.domElement.addEventListener("mousedown", () => {
-isDragging = true;
+renderer.domElement.addEventListener("mousedown", ()=>{
+mouseDown = true;
 });
 
-renderer.domElement.addEventListener("mouseup", () => {
-isDragging = false;
+renderer.domElement.addEventListener("mouseup", ()=>{
+mouseDown = false;
 });
 
-renderer.domElement.addEventListener("mousemove", (event) => {
+renderer.domElement.addEventListener("mousemove",(e)=>{
 
-if (!isDragging || !mesh) return;
+if(!mouseDown || !mesh) return;
 
-let deltaMove = {
-x: event.offsetX - previousMousePosition.x,
-y: event.offsetY - previousMousePosition.y
-};
-
-mesh.rotation.y += deltaMove.x * 0.01;
-mesh.rotation.x += deltaMove.y * 0.01;
-
-previousMousePosition = {
-x: event.offsetX,
-y: event.offsetY
-};
+mesh.rotation.y += e.movementX * 0.01;
+mesh.rotation.x += e.movementY * 0.01;
 
 });
 
 
-// COULEURS
+// couleurs
 
 const colors = document.querySelectorAll(".color");
 
-colors.forEach(color => {
+colors.forEach(c=>{
 
-color.addEventListener("click", () => {
+c.addEventListener("click",()=>{
 
-const c = color.dataset.color;
+const color = c.getAttribute("data-color");
 
-if (mesh) {
-mesh.material.color.set(c);
+if(mesh){
+mesh.material.color.set(color);
 }
 
 });
