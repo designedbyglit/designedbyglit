@@ -1,23 +1,31 @@
+window.onload = function(){
+
+const viewer = document.getElementById("viewer");
+
+if(!viewer){
+console.log("viewer introuvable");
+return;
+}
+
 let scene = new THREE.Scene();
 
 let camera = new THREE.PerspectiveCamera(
 75,
-400 / 400,
+viewer.clientWidth / viewer.clientHeight,
 0.1,
 1000
 );
 
-let renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(400,400);
+let renderer = new THREE.WebGLRenderer({antialias:true});
 
-document.getElementById("viewer").appendChild(renderer.domElement);
+renderer.setSize(viewer.clientWidth, viewer.clientHeight);
 
-let light = new THREE.DirectionalLight(0xffffff,1);
-light.position.set(0,1,1);
+viewer.appendChild(renderer.domElement);
+
+
+let light = new THREE.AmbientLight(0xffffff,1);
 scene.add(light);
 
-let light2 = new THREE.AmbientLight(0xffffff,0.6);
-scene.add(light2);
 
 let loader = new THREE.STLLoader();
 
@@ -26,12 +34,10 @@ let mesh;
 loader.load("piece.stl", function(geometry){
 
 let material = new THREE.MeshStandardMaterial({
-color:0x7a00ff,
-metalness:0.3,
-roughness:0.4
+color:0x7a00ff
 });
 
-mesh = new THREE.Mesh(geometry,material);
+mesh = new THREE.Mesh(geometry, material);
 
 geometry.center();
 
@@ -43,8 +49,6 @@ scene.add(mesh);
 
 camera.position.z = 120;
 
-
-// animation
 
 function animate(){
 
@@ -61,42 +65,22 @@ renderer.render(scene,camera);
 animate();
 
 
-// rotation souris
-
-let mouseDown = false;
-
-renderer.domElement.addEventListener("mousedown", ()=>{
-mouseDown = true;
-});
-
-renderer.domElement.addEventListener("mouseup", ()=>{
-mouseDown = false;
-});
-
-renderer.domElement.addEventListener("mousemove",(e)=>{
-
-if(!mouseDown || !mesh) return;
-
-mesh.rotation.y += e.movementX * 0.01;
-mesh.rotation.x += e.movementY * 0.01;
-
-});
-
-
 // couleurs
 
 const colors = document.querySelectorAll(".color");
 
 colors.forEach(c=>{
 
-c.addEventListener("click",()=>{
+c.onclick = function(){
 
-const color = c.getAttribute("data-color");
+let color = c.dataset.color;
 
 if(mesh){
 mesh.material.color.set(color);
 }
 
-});
+}
 
 });
+
+}
