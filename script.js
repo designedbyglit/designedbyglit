@@ -1,87 +1,123 @@
-window.onload = function(){
+let scene, camera, renderer, mesh, controls;
+
+init();
+animate();
+
+function init(){
 
 const viewer = document.getElementById("viewer");
 
-if(!viewer){
-console.log("viewer introuvable");
-return;
-}
+scene = new THREE.Scene();
 
-let scene = new THREE.Scene();
-
-let camera = new THREE.PerspectiveCamera(
+camera = new THREE.PerspectiveCamera(
 75,
 viewer.clientWidth / viewer.clientHeight,
 0.1,
 1000
 );
 
-let renderer = new THREE.WebGLRenderer({antialias:true});
-
+renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(viewer.clientWidth, viewer.clientHeight);
-
 viewer.appendChild(renderer.domElement);
 
 
-let light = new THREE.AmbientLight(0xffffff,1);
-scene.add(light);
+// lumières
+
+const light1 = new THREE.DirectionalLight(0xffffff,1);
+light1.position.set(1,1,1);
+scene.add(light1);
+
+const light2 = new THREE.AmbientLight(0xffffff,0.5);
+scene.add(light2);
 
 
-let loader = new THREE.STLLoader();
+// chargement STL
 
-let mesh;
+const loader = new THREE.STLLoader();
 
-loader.load("piece.STL", function(geometry){
+loader.load("piece.stl", function(geometry){
 
-let material = new THREE.MeshStandardMaterial({
-color:0x7a00ff
+const material = new THREE.MeshStandardMaterial({
+color:0x7a00ff,
+metalness:0.3,
+roughness:0.4
 });
 
 mesh = new THREE.Mesh(geometry, material);
 
 geometry.center();
 
-mesh.scale.set(0.5,0.5,0.5);
+mesh.scale.set(0.6,0.6,0.6);
 
 scene.add(mesh);
 
 });
 
+
 camera.position.z = 120;
 
+
+// CONTROLES SOURIS
+
+controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+controls.enableZoom = true;
+controls.enablePan = false;
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+
+}
+
+
+// animation
 
 function animate(){
 
 requestAnimationFrame(animate);
 
-if(mesh){
-mesh.rotation.y += 0.01;
+if(controls){
+controls.update();
 }
 
 renderer.render(scene,camera);
 
 }
 
-animate();
 
+// gestion couleurs
 
-// couleurs
+let selectedColors = [];
 
 const colors = document.querySelectorAll(".color");
 
-colors.forEach(c=>{
+colors.forEach(color=>{
 
-c.onclick = function(){
+color.addEventListener("click",()=>{
 
-let color = c.dataset.color;
+const c = color.dataset.color;
+
+if(selectedColors.includes(c)){
+
+selectedColors = selectedColors.filter(x => x !== c);
+color.classList.remove("selected");
+
+}else{
+
+if(selectedColors.length < 4){
+
+selectedColors.push(c);
+color.classList.add("selected");
+
+}
+
+}
 
 if(mesh){
-mesh.material.color.set(color);
-}
+
+mesh.material.color.set(selectedColors[0] || "#7a00ff");
 
 }
 
 });
 
-}
-
+});
