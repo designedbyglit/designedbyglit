@@ -1,26 +1,28 @@
 const colors = document.querySelectorAll(".color");
 const preview = document.getElementById("preview");
+const couleursInput = document.getElementById("couleurs");
 
-let selected = [];
+let selectedColors = [];
 
 colors.forEach(color => {
 
 color.addEventListener("click", () => {
 
+const name = color.dataset.color;
+
 if(color.classList.contains("selected")){
 
 color.classList.remove("selected");
-selected = selected.filter(c => c !== color);
+selectedColors = selectedColors.filter(c => c !== name);
 
 }else{
 
-if(selected.length < 4){
+if(selectedColors.length < 4){
 
 color.classList.add("selected");
-selected.push(color);
+selectedColors.push(name);
 
-const bg = window.getComputedStyle(color).backgroundColor;
-preview.style.background = bg;
+preview.style.background = window.getComputedStyle(color).backgroundColor;
 
 }else{
 
@@ -29,6 +31,8 @@ alert("Maximum 4 couleurs");
 }
 
 }
+
+couleursInput.value = selectedColors.join(", ");
 
 });
 
