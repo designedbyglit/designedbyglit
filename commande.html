@@ -4,12 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Commande</title>
+
 <link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/loaders/STLLoader.js"></script>
+
 </head>
 
 <body>
 
 <header>
+
 <a href="index.html" class="logo">
 <img src="logo.png">
 </a>
@@ -18,11 +24,10 @@
 <a href="index.html">Accueil</a>
 <a href="commande.html">Commander</a>
 </nav>
+
 </header>
 
 <section class="commande">
-
-<form action="https://formspree.io/f/xeergeee" method="POST">
 
 <div class="commande-container">
 
@@ -31,81 +36,63 @@
 <h2>Configurer ta pièce</h2>
 
 <label>Nom</label>
-<input type="text" name="nom" required>
+<input type="text" name="nom">
 
 <label>Email</label>
-<input type="email" name="email" required>
+<input type="email" name="email">
 
 <label>Moteur</label>
-<select name="moteur">
+<select>
 <option>AM6</option>
 <option>Derbi</option>
 </select>
 
 <label>Type de pièce</label>
-<select name="piece">
+<select>
 <option>Cache allumage</option>
 <option>Cache obturateur</option>
 <option>Récupérateur de fluide</option>
 </select>
 
 <label>Texte</label>
-<input type="text" name="texte">
-
-<label>Logo</label>
-<input type="file" name="logo" id="logoInput" accept="image/*">
-
-<div class="preview-image">
-<img id="logoPreview" src="" style="max-width:200px;display:none;border-radius:10px;margin-top:10px;">
-</div>
+<input type="text">
 
 <label>Détails</label>
-<textarea name="details"></textarea>
+<textarea></textarea>
 
-<button type="submit" class="cta">Envoyer la commande</button>
+<button class="cta">Envoyer</button>
 
 </div>
 
 <div class="form-right">
 
-<h2>Choisis les couleurs (max 4)</h2>
+<h2>Couleurs</h2>
 
 <div class="color-picker">
 
-<div class="color noir" data-color="noir"></div>
-<div class="color blanc" data-color="blanc"></div>
-<div class="color rouge" data-color="rouge"></div>
-<div class="color orange" data-color="orange"></div>
-<div class="color jaune" data-color="jaune"></div>
-<div class="color vertclair" data-color="vert clair"></div>
-<div class="color vertfonce" data-color="vert foncé"></div>
-<div class="color bleuclair" data-color="bleu clair"></div>
-<div class="color bleufonce" data-color="bleu foncé"></div>
-<div class="color violet" data-color="violet"></div>
-<div class="color rose" data-color="rose"></div>
-<div class="color marron" data-color="marron"></div>
+<div class="color rouge" data-color="#ff0000"></div>
+<div class="color bleu" data-color="#0044ff"></div>
+<div class="color vert" data-color="#00aa00"></div>
+<div class="color jaune" data-color="#ffee00"></div>
+<div class="color violet" data-color="#7a00ff"></div>
+<div class="color rose" data-color="#ff4df2"></div>
+<div class="color orange" data-color="#ff6600"></div>
+<div class="color noir" data-color="#000000"></div>
+<div class="color blanc" data-color="#ffffff"></div>
 
 </div>
 
-<input type="hidden" name="couleurs" id="couleurs">
+<h3>Aperçu 3D</h3>
 
-<h3>Aperçu</h3>
-<div id="preview"></div>
+<div id="viewer"></div>
 
 </div>
 
 </div>
-
-</form>
 
 </section>
-
-<footer>
-<p>© Designed by Glit</p>
-</footer>
 
 <script src="script.js"></script>
 
 </body>
 </html>
-
